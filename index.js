@@ -17,8 +17,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 
-
-
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -41,10 +39,10 @@ app.post('/sendMessage', async function (req, res) {
         to: smtp_login, // list of receivers
         subject: "Job Recruiting", // Subject line
         // text: "Hello, how u doing", // plain text body
-        html: `<b>Message from portfolio contacts page</b>
-        <div>name: ${name}</div>
-        <div>Email: ${email}</div>
-        <div>Message: ${message}</div>`, // html body
+        html: `<h2><b>Message from portfolio contacts page</b></h2>
+        <div><b>Name:</b> ${name}</div>
+        <div><b>Email:</b> ${email}</div>
+        <div><b>Message:</b> ${message}</div>`, // html body
     });
 
     res.send('Message was sent!')
