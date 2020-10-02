@@ -45,11 +45,11 @@ app.get('/', (req, res) => {
 })
 
 //app.post('/sendMessage', async function (req, res) {
-app.post('/sendMessage', cors(),async function (req, res) {
+app.post('/sendMessage', cors(),function (req, res) {
 
     const {name, email, message} = req.body;
 
-    let info = await transporter.sendMail({
+    let info =  transporter.sendMail({
         from: 'My portfolio', // sender address
         to: smtp_login, // list of receivers
         subject: "Job Recruiting", // Subject line
