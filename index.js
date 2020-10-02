@@ -24,8 +24,8 @@ app.options('*', cors())
 //     next();
 // });
 
-// app.use(bodyParser.urlencoded({extended: false}))
-// app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 
 
 let transporter = nodemailer.createTransport({
