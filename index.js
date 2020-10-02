@@ -11,8 +11,14 @@ const smtp_login = process.env.SMTP_LOGIN || '';
 const smtp_password = process.env.SMTP_PASSWORD || '';
 
 
-app.use(cors({origin: '*', optionsSuccessStatus: 200,}));
+// app.use(cors({origin: '*', optionsSuccessStatus: 200,}));
 // app.options('*', cors())
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -36,7 +42,8 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.post('/sendMessage', cors(), async function (req, res) {
+//app.post('/sendMessage', cors(), async function (req, res) {
+app.post('/sendMessage', async function (req, res) {
 
     const {name, email, message} = req.body;
 
