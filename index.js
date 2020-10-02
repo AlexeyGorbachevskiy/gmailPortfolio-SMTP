@@ -11,7 +11,7 @@ const smtp_login = process.env.SMTP_LOGIN || '';
 const smtp_password = process.env.SMTP_PASSWORD || '';
 
 
-app.use(cors());
+app.use(cors({origin: true}));
 app.options('*', cors())
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -26,16 +26,17 @@ let transporter = nodemailer.createTransport({
     },
 });
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
 app.post('/sendMessage', async function (req, res) {
-
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
-    res.setHeader('Access-Control-Allow-Credentials', true); // If needed
 
     const {name, email, message} = req.body;
 
