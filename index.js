@@ -12,6 +12,7 @@ const smtp_password = process.env.SMTP_PASSWORD || '';
 
 
 app.use(cors());
+app.options('*', cors())
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -38,7 +39,6 @@ app.post('/sendMessage', async function (req, res) {
         from: 'My portfolio', // sender address
         to: smtp_login, // list of receivers
         subject: "Job Recruiting", // Subject line
-        // text: "Hello, how u doing", // plain text body
         html: `<h2><b>Message from portfolio contacts page</b></h2>
         <div><b>Name:</b> ${name}</div>
         <div><b>Email:</b> ${email}</div>
