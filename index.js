@@ -29,10 +29,12 @@ app.use(bodyParser.json())
 
 
 let transporter = nodemailer.createTransport({
+
     service: 'gmail',
     auth: {
         user: smtp_login,
         pass: smtp_password,
+        type: 'login',
     },
 });
 
