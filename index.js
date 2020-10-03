@@ -66,3 +66,8 @@ const port = process.env.PORT || 3010;
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
+
+process.on("unhandledRejection", (reason, p) => {
+    console.log("Error handle: ", reason, p);
+});
+
